@@ -1,65 +1,35 @@
 #include <iostream>
-#include <cstdlib>
-#include <array>
-#include <cmath>
-struct Point2D
+#include <vector>
+struct Matrix2D
 {
-    double x;
-    double y;
+   std::vector <std::vector<int>> contents;
+   void print()
+   {
+       int rows = contents.size();
+       int cols = contents[0].size();
+       std::cout<<"Contents of the matrix: \n";
+       for(int i = 0; i < rows; i++){
+           for (int j = 0; j < cols; j++)
+           {
+               std::cout << contents[i][j]<<" ";
+           }
+           std::cout << std::endl;
+       }
+   }
+
 };
 
-Point2D create_point()
-{
-    Point2D tmp;
-    tmp.x = rand() % 10;
-    tmp.y = rand() % 10;
+int main(){
+    Matrix2D a;
+    Matrix2D b;
 
-    return tmp;
-}
-void create_in_place(Point2D& point)
-{
-    point.x = rand()% 10;
-    point.y = rand()% 10;
-}
-float triangle_area(Point2D a, Point2D b, Point2D c)
-{
-    float product = a.x * (b.y - c.y) + b.x *(c.y - a.y) + c.x*(a.y - b.y);
-    return abs(product / 2);
-}
-int main (){
-    std::array<Point2D, 10> points;
+    a.contents = {{1,5,3}, {4,8,7}, {3,9,4}};
+    b.contents = {{5,2,9}, {3,2,8}, {1,0,3}};
 
-    for ( int i = 0; i < 10; i++)
-    {
-        points[i] = create_point();
-        std::cout <<"Point ["<<i <<"] = ("<<points[i].x <<", "<<points[i].y <<")"<<std::endl;
-    }
+    a.print();
+    b.print();
 
-    float largest_area = 0.0;
-    Point2D first, second, third;
 
-    for ( int i = 0; i < 10; i++)
-    {
-        for ( int j = 0; j < 10; j++)
-        {
-            for ( int k = 0; k < 10; k++)
-            {
-                float area = triangle_area(points[i], points[j], points[k]);
-                        if ( area > largest_area)
-                        {
-                            largest_area = area;
-                            first = points[i];
-                            second = points[j];
-                            third = points[k];
-            }
-
-            }
-        }
-    }
-    std::cout <<"Largest area is: "<<largest_area<<std::endl;
-    std::cout <<"First point is: ("<<first.x <<", "<< first.y<< ") "<<std::endl;
-    std::cout <<"Second point is: ("<<second.x <<", "<< second.y<< ") "<<std::endl;
-    std::cout <<"Third point is: ("<<third.x <<", "<< third.y<< ") "<<std::endl;
     return 0;
 
 }
