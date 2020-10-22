@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <cstdlib>
 
 struct Point2D
 {
@@ -7,20 +7,32 @@ struct Point2D
     double y;
 };
 
-int main (){
+Point2D create_point()
+{
+    Point2D tmp;
+    tmp.x = rand() % 100;
+    tmp.y = rand() % 100;
 
-    Point2D mypoint;
-    mypoint.x = 645.34;
-    mypoint.y = 43.53;
+    return tmp;
+}
+void create_in_place(Point2D& point)
+{
+    point.x = rand()% 10;
+    point.y = rand()% 10;
+}
+
+int main (){
+    srand(0);
+    Point2D mypoint = create_point();
+
 
     std::cout<< "Value of X: " << mypoint.x <<std::endl;
     std::cout<< "Value of Y: " << mypoint.y <<std::endl;
 
     Point2D myotherpoint;
-    myotherpoint.x = 5453.54;
-    myotherpoint.y = 4545.34;
+    create_in_place(myotherpoint);
     std::cout<< "Value of X: " << myotherpoint.x <<std::endl;
     std::cout<< "Value of Y: " << myotherpoint.y <<std::endl;
-
+return 0;
 
 }
