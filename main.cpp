@@ -11,14 +11,14 @@ struct Matrix2D
     int rows() {
         return contents.size();
     }
-   void add(Matrix2D other){
-       if (other.rows() == rows() && other.cols() == cols())
+   void multiply(Matrix2D other ){
+       if (other.rows() == cols())
        {
            for (int i = 0; i < rows(); i++)
            {
                for (int j = 0; j < cols(); j++)
                {
-                   contents[i][j] += other.contents[i][j];
+                   other.contents[i][j] *= contents[i][j];
                }
            }
        }
@@ -78,8 +78,8 @@ int main(){
     std::cout << "Printing matrix b: "<<std::endl;
     b.print();
 
-    a.add(b);
-    std::cout << "Printing added matrices: "<<std::endl;
+    a.multiply(b);
+    std::cout << "Printing multiplied matrices: "<<std::endl;
 
     a.print();
 
